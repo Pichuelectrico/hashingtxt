@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane alignment="CENTER" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.firma.controller.PrimaryController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+
+    <Label text="Cédula:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+    <TextField fx:id="txtCedula" promptText="Ingrese su cédula" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+    <Label text="Nombre:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+    <TextField fx:id="txtNombre" promptText="Ingrese su nombre completo" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+    <Label text="Institución:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+    <TextField fx:id="txtInstitucion" promptText="Ingrese su institución" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+    <Label text="Cargo:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+    <TextField fx:id="txtCargo" promptText="Ingrese su cargo" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+    <Label text="Archivo (txt/p12):" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+    <TextField fx:id="txtArchivo" editable="false" promptText="Seleccione un archivo .txt" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+    <Button onAction="#seleccionarArchivo" text="Examinar" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+
+    <Label text="Certificado:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+    <ComboBox fx:id="cmbCertificado" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+
+    <Button onAction="#firmarDocumento" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" text="Firmar o Desencriptar Documento" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+   <columnConstraints>
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
+</GridPane>
