@@ -1,16 +1,20 @@
 package com.firma.controller;
 
-import com.firma.model.Firma;
-import com.firma.model.FirmaDAO;
-import com.firma.util.HashUtils;
-import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.stage.FileChooser;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+
+import com.firma.model.Firma;
+import com.firma.model.FirmaDAO;
+import com.firma.util.HashUtils;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
 
 public class PrimaryController {
     @FXML private TextField txtCedula;

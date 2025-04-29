@@ -1,7 +1,7 @@
+com\firma\model\FirmaDAO.class
+com\firma\App.class
 module-info.class
-com/firma/util/DatabaseConnection.class
-com/firma/model/FirmaDAO.class
-com/firma/model/Firma.class
-com/firma/controller/PrimaryController.class
-com/firma/App.class
-com/firma/util/HashUtils.class
+com\firma\model\Firma.class
+com\firma\util\HashUtils.class
+com\firma\controller\PrimaryController.class
+com\firma\util\DatabaseConnection.class
