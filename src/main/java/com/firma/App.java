@@ -1,12 +1,14 @@
 package com.firma;
 
+import java.io.IOException;
+
+import com.firma.controller.PrimaryController;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 
 public class App extends Application {
 
@@ -14,8 +16,14 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("primary"), 640, 480);
-        stage.setScene(scene);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("primary.fxml"));
+        Parent root = loader.load();
+
+        PrimaryController controller = loader.getController();
+        controller.setStage(stage);
+
+        stage.setTitle("FirmaEC");
+        stage.setScene(new Scene(root, 800, 600));
         stage.show();
     }
 
@@ -27,7 +35,6 @@ public class App extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
     }
-
     public static void main(String[] args) {
         launch();
     }
