@@ -5,6 +5,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
@@ -14,11 +16,9 @@ public class DatabaseConnection {
 
     public static Connection getConnection() throws SQLException, IOException {
         if (connection == null || connection.isClosed()) {
-            Properties env = new Properties();
-            env.load(Files.newBufferedReader(Paths.get(".env")));
-            String url = env.getProperty("DB_URL");
-            String user = env.getProperty("DB_USER");
-            String password = env.getProperty("DB_PASSWORD");
+            String url = "jdbc:mysql://localhost:3306/mi_base";
+            String user = "root";
+            String password = "awita2";
             connection = DriverManager.getConnection(url, user, password);
             createTableIfNotExists();
         }
@@ -28,19 +28,65 @@ public class DatabaseConnection {
     private static void createTableIfNotExists() throws SQLException {
         String createTableSQL = "CREATE TABLE IF NOT EXISTS firmas (" +
             "id INT AUTO_INCREMENT PRIMARY KEY, " +
-            "cedula VARCHAR(20) NOT NULL, " +
             "nombre VARCHAR(100) NOT NULL, " +
-            "institucion VARCHAR(100) NOT NULL, " +
-            "cargo VARCHAR(100) NOT NULL, " +
-            "fecha DATE NOT NULL, " +
             "archivo_original VARCHAR(255) NOT NULL, " +
             "archivo_firmado VARCHAR(255) NOT NULL, " +
             "certificado_usado VARCHAR(50) NOT NULL, " +
-            "archivo_hash VARCHAR(64), " +
+            "alias_certificado VARCHAR(100), " +
+            "hash_clave_privada VARCHAR(256), " +
             "created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP" +
             ")";
         try (Statement stmt = connection.createStatement()) {
             stmt.execute(createTableSQL);
         }
+    }
+
+    public static void insertarFirma(String nombre, String archivoOriginal, String archivoFirmado, String certificadoUsado, String aliasCertificado, String hashClavePrivada) throws SQLException, IOException {
+        String insertSQL = "INSERT INTO firmas (nombre, archivo_original, archivo_firmado, certificado_usado, alias_certificado, hash_clave_privada) VALUES (?, ?, ?, ?, ?, ?)";
+        try (Connection conn = getConnection(); PreparedStatement pstmt = conn.prepareStatement(insertSQL)) {
+            pstmt.setString(1, nombre);
+            pstmt.setString(2, archivoOriginal);
+            pstmt.setString(3, archivoFirmado);
+            pstmt.setString(4, certificadoUsado);
+            pstmt.setString(5, aliasCertificado);
+            pstmt.setString(6, hashClavePrivada);
+            pstmt.executeUpdate();
+        }
+    }
+
+    public static boolean verificarDocumento(String archivoFirmado) throws SQLException, IOException {
+        String querySQL = "SELECT COUNT(*) FROM firmas WHERE archivo_firmado = ?";
+        try (Connection conn = getConnection(); PreparedStatement pstmt = conn.prepareStatement(querySQL)) {
+            pstmt.setString(1, archivoFirmado);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean verificarCertificadoUsado(String certificadoUsado) throws SQLException, IOException {
+        String querySQL = "SELECT COUNT(*) FROM firmas WHERE certificado_usado = ?";
+        try (Connection conn = getConnection(); PreparedStatement pstmt = conn.prepareStatement(querySQL)) {
+            pstmt.setString(1, certificadoUsado);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static int contarElementos() throws SQLException, IOException {
+        String countSQL = "SELECT COUNT(*) FROM firmas";
+        try (Connection conn = getConnection(); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(countSQL)) {
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        }
+        return 0;
     }
 }

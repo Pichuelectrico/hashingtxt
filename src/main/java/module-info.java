@@ -4,9 +4,12 @@ module com.firma {
     requires transitive javafx.graphics;
     requires java.base;
     requires transitive java.sql;
-    requires org.apache.pdfbox;
+    requires kernel;
+    requires sign;
+    requires layout;
+    requires io;
     requires org.bouncycastle.provider;
-    requires org.bouncycastle.pkix;
+    requires org.bouncycastle.pkix; 
 
     opens com.firma.controller to javafx.fxml;
     exports com.firma;

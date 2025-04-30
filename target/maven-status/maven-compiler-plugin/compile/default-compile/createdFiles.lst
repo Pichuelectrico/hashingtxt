@@ -1,6 +1,9 @@
 com\firma\model\FirmaDAO.class
+com\firma\util\p12Util.class
 com\firma\App.class
+com\firma\util\Firmador.class
 module-info.class
+com\firma\model\P12Entry.class
 com\firma\model\Firma.class
 com\firma\util\HashUtils.class
 com\firma\controller\PrimaryController.class
