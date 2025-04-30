@@ -2,11 +2,13 @@ package com.firma.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
 
 import com.firma.model.P12Entry;
-import com.firma.util.p12Util;
-import com.firma.util.Firmador;
 import com.firma.util.DatabaseConnection;
+import com.firma.util.Firmador;
+import com.firma.util.p12Util;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,8 +24,6 @@ import javafx.scene.input.TransferMode;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
-import java.sql.SQLException;
 
 public class PrimaryController {
 
@@ -212,7 +212,7 @@ public class PrimaryController {
     void generateP12(ActionEvent event) {
         String nombre = "usuario1";
         String password = "123456";
-        String archivoSalida = selectedDirectory.getAbsolutePath() + nombre + ".p12";
+        String archivoSalida = selectedDirectory.getAbsolutePath() + "\\" + nombre + ".p12";
         int numTries;
         try {
             numTries = DatabaseConnection.contarElementos()+1;
@@ -222,6 +222,8 @@ public class PrimaryController {
         }
         try {
             p12Util.crearArchivoP12(nombre, password, archivoSalida, numTries);
+            List<P12Entry> entries = p12Util.mostrarContenidoP12(archivoSalida, password);
+            DatabaseConnection.insertarFirma(nombre, archivoSalida, "yes", entries.get(0).getCertificate().toString(), entries.get(0).getAlias(), entries.get(0).getCertificate().getPublicKey().toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
