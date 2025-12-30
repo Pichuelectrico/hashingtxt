@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 C:\Users\alijo\Documents\GitHub\hashingtxt\src\main\java\com\firma\App.java
 C:\Users\alijo\Documents\GitHub\hashingtxt\src\main\java\com\firma\controller\PrimaryController.java
 C:\Users\alijo\Documents\GitHub\hashingtxt\src\main\java\com\firma\model\Firma.java
@@ -8,3 +9,12 @@ C:\Users\alijo\Documents\GitHub\hashingtxt\src\main\java\com\firma\util\Firmador
 C:\Users\alijo\Documents\GitHub\hashingtxt\src\main\java\com\firma\util\HashUtils.java
 C:\Users\alijo\Documents\GitHub\hashingtxt\src\main\java\com\firma\util\p12Util.java
 C:\Users\alijo\Documents\GitHub\hashingtxt\src\main\java\module-info.java
+=======
+/Users/joshuareinoso/Documents/GitHub/hashingtxt/src/main/java/module-info.java
+/Users/joshuareinoso/Documents/GitHub/hashingtxt/src/main/java/com/firma/util/DatabaseConnection.java
+/Users/joshuareinoso/Documents/GitHub/hashingtxt/src/main/java/com/firma/model/FirmaDAO.java
+/Users/joshuareinoso/Documents/GitHub/hashingtxt/src/main/java/com/firma/App.java
+/Users/joshuareinoso/Documents/GitHub/hashingtxt/src/main/java/com/firma/controller/PrimaryController.java
+/Users/joshuareinoso/Documents/GitHub/hashingtxt/src/main/java/com/firma/model/Firma.java
+/Users/joshuareinoso/Documents/GitHub/hashingtxt/src/main/java/com/firma/util/HashUtils.java
+>>>>>>> Stashed changes
